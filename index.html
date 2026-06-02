@@ -7,6 +7,34 @@
   <link rel="icon" href="src/dist/img/linkedin-profile-pic-cropped.png" type="image/x-icon">
   <link rel="stylesheet" href="src/dist/css/main.bundle.css">
   <script src="https://kit.fontawesome.com/4e5a72c756.js"></script>
+  <style>
+    .portfolio-parent {
+      display: flex;
+    }
+
+    .portfolio-card {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .portfolio-card .title {
+      margin-bottom: 0.25rem;
+    }
+
+    .portfolio-description {
+      min-height: 4.5rem;
+      line-height: 1.45;
+      margin-bottom: 0.25rem;
+    }
+
+    .portfolio-image {
+      margin-top: auto;
+    }
+  </style>
 </head>
 
 <body>
@@ -32,7 +60,7 @@
         <div class="level">
           <div class="level-item has-text-centered">
             <figure class="image is-128x128">
-              <img class="is-rounded" src="src/dist/img/linkedin-profile-pic-cropped.png">
+              <img class="is-rounded" src="src/dist/img/linkedin-profile-pic-cropped2.png">
             </figure>
           </div>
         </div>
@@ -54,14 +82,15 @@
     <div class="container">
       <h1 class="title">About Me</h1>
       <hr />
-      <p>Hello, my name is Beatrice Li. I have recently embarked on a career change from an e-commerce operations role into the field of IT system development as Business Analyst. Skilled in data analysis, process improvement, and API testing, with a strong technical foundation from a backend development bootcamp. Currently seeking opportunities at structured, growth-oriented companies where I can apply my analytical mindset and problem-solving skills to drive business efficiency.
-        <br> <br>
-        With the rapid advancement of AI technologies, I recognize the growing importance of robust system design and quality assurance. This realization has driven my desire to focus on test automation and enhance the efficiency of project workflow. I&rsquo;m eager to leverage my background in ecommerce operations and my passion for technology to contribute effectively to your team.</p>
+      <p>I am a Business Analyst with a non-traditional path, transitioning from e-commerce into system development and AI-driven SaaS environments. Over the past year, I have worked on custom systems and early-stage products, focusing on translating business needs into actionable technical solutions.<br><br>
+Beyond traditional BA responsibilities, I actively experiment with AI-powered workflows and automation. I use tools like n8n to streamline internal processes, build small utility tools, and enhance delivery efficiency through a practical vibe coding approach. I am also familiar with early-stage SaaS development, contributing to product thinking and rapid implementation.<br><br>
+While expanding into AI and product development, my core focus remains in Business Analysis -- working closely with stakeholders to ensure every system built is grounded in real business value.
+I am now looking to join a well-structured team where I can continue to grow as a Business Analyst, connecting business needs, technical execution, and product outcomes.</p>
     </div>
   </section>
   <section class="section">
     <div class="container">
-      <h1 class="title">Experience</h1>
+      <h1 class="title">Work Experience</h1>
       <hr />
       <div class="card">
         <div class="card-content">
@@ -80,12 +109,12 @@
           <div class="content">
             <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.</p>-->
             <ul>
-              <li>Collaborated with project coordinators and end users to address daily bug fixes, provide payment support, and manage UI enhancement initiatives, ensuring seamless user experience and system reliability.</li>
-              <li>Ensured efficient and timely content synchronization across various deployment environments, consistently meeting project deadlines while maintaining data integrity
+              <li>Collaborate with project coordinators and end users to streamline daily operations, overseeing bug fixes and UI enhancements for payment systems, which significantly improved system reliability and user experience</li>
+              <li>Engineer an in-house marketing automation solution by integrating n8n workflows with AI LLMs; successfully reduced content copywriting time by 50% and optimized social media scheduling
               </li>
-              <li>Developed comprehensive test plans and conducted User Acceptance Testing (UAT) to validate system functionality and alignment with Requirements Specification Document
+              <li>Formulate comprehensive test plans and execute User Acceptance Testing (UAT) using Playwright automation, ensuring system fixes strictly adhered to the Requirement Specification Document
               </li>
-              <li>Delivered tender presentations to articulate the company&rsquo;s vision for EDM system development, including technical proposals and budget planning, effectively showcasing value propositions to prospective clients</li>
+              <li>Deliver compelling tender presentations for EDM system development, articulating technical proposals and budget planning to effectively showcase value propositions to prospective clients</li>
             </ul>
             <div class="tags">
               <!--<span class="tag">c#</span>-->
@@ -190,32 +219,39 @@
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-12">
           <div class="tile">
-            <div class="tile is-parent">
-              <article class="tile is-child notification">
-                <p class="title">Playwright Shopping Cart automation test project</p>
-                <a href="https://github.com/Linkthethink/playwright-cart-testing-demo"><figure class="image is-3by2">
-                  <img src="src/dist/img/project-4-cover.jpg">
-                </figure></a>
+            <div class="tile is-parent portfolio-parent">
+              <article class="tile is-child notification portfolio-card">
+                <p class="title">WebXR Now</p>
+                <p class="portfolio-description">Created an AI-enpowered WebXR scene builder that helps users generate immersive virtual environments quickly for demos, storytelling, and interactive concept validation.</p>
+                 <a href="">Side Project Doc</a>
+                <a href="https://www.webxrnow.com">
+                  <figure class="image is-3by2 portfolio-image">
+                    <img src="src/dist/img/project-2-cover(2026).png" alt="WebXR Now project preview">
+                  </figure>
+                </a>
+               
               </article>
             </div>
-            <div class="tile is-parent">
-              <article class="tile is-child notification">
+            <div class="tile is-parent portfolio-parent">
+              <article class="tile is-child notification portfolio-card">
                 <p class="title">Telegram Bot with API</p>
-                <br><br>
-                <a href="https://github.com/Linkthethink/TelegramProject"><figure class="image is-3by2">
-                  <img src="src/dist/img/project1-cover.jpg">
-                </figure></a>
+                <p class="portfolio-description">Developed a Telegram bot integrated with REST APIs to automate customer service responses and streamline communication processes.</p>
+                <a href="">
+                  <figure class="image is-3by2 portfolio-image">
+                    <img src="https://linkthethink.github.io/src/dist/img/project1-cover.jpg" alt="AI-driven YAML test automation platform">
+                  </figure>
+                </a>
               </article>
             </div>
-            <div class="tile is-parent">
-              <article class="tile is-child notification">
+            <div class="tile is-parent portfolio-parent">
+              <article class="tile is-child notification portfolio-card">
                 <p class="title">Design Work Portfolio</p>
-                <br><br>
+                <p class="portfolio-description">Curated cross-channel design work including marketing visuals, social assets, and presentation layouts that support product communication and brand consistency.</p>
                 <a href="https://www.canva.com/design/DAGf7oCD7bk/BGcGbsQQU1oNr8TANFjkwQ/edit?utm_content=DAGf7oCD7bk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
-                <figure class="image is-4by3">
-                  <img src="src/dist/img/project-3-cover.jpg">
-                </figure>
-              </a>
+                  <figure class="image is-3by2 portfolio-image">
+                    <img src="src/dist/img/project-3-cover.jpg" alt="Design work portfolio preview">
+                  </figure>
+                </a>
               </article>
             </div>
           </div>
@@ -229,6 +265,18 @@
       <h1 class="title">Education</h1>
       <hr />
       <div class="card">
+        <div class="card-content">
+          <div class="content">
+            <p class="title is-4">HKU School of Professional and Continuing Education</p>
+            <p class="subtitle is-6"><time datetime="2026-1">Jan 2026 </time> - <time
+                datetime="2026-4">Now</time></p>
+          </div>
+          <div class="content">
+            Postgraduate Diploma in Information Technology (IT/IS Project Management)
+          </div>
+        </div>
+      </div>
+      <div class="card card-gap">
         <div class="card-content">
           <div class="content">
             <p class="title is-4">City University of Hong Kong</p>
@@ -259,11 +307,10 @@
         <div class="card-content">
           <div class="content">
             <ul dir="auto">
+              <li>Certificate in Digital Marketing (QF Level 3), Feva Works IT Education Centre</li>
               <li>Certification in Backend Web Developer, Employee Retraining Board</li>
-              <li>Google Analytics Certification</li>
               <li>Udemy Certification, The Complete 2025 Software Testing Bootcamp</li>
-              <li>Linkedin Learning Certificate Of Completion, Performance Testing Foundations</li>
-              <li>Linkedin Learning Certificate Of Completion, Postman Essential Training</li>
+              <li>Linkedin Learning Certification of completion, SQL Essential Training</li>
               </ul>
           </div>
         </div>

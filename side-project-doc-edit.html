@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Side Project Doc Edit Mode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface-soft: #eef2ff;
+      --line: #d6deef;
+      --text: #1b2433;
+      --muted: #5e6d89;
+      --primary: #1d67ff;
+      --primary-strong: #1454d9;
+      --success: #1f8f5f;
+      --warning: #c2790b;
+      --danger: #ba2f4a;
+      --shadow: 0 14px 32px rgba(18, 36, 68, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Barlow", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 5% 0%, rgba(29, 103, 255, 0.16), transparent 36%),
+        radial-gradient(circle at 94% 8%, rgba(31, 143, 95, 0.12), transparent 28%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--line);
+      background: linear-gradient(180deg, #ebf1ff 0%, #f7f9ff 100%);
+      padding: 1.25rem;
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(140deg, var(--primary), #62b2ff);
+      box-shadow: 0 8px 16px rgba(29, 103, 255, 0.25);
+    }
+
+    .brand-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-subtitle {
+      margin: 0.2rem 0 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .menu {
+      margin: 1.5rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      padding: 0.65rem 0.75rem;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .menu a:hover,
+    .menu a:focus-visible {
+      background: #ffffff;
+      border-color: var(--line);
+      outline: none;
+    }
+
+    .menu .is-active {
+      background: #ffffff;
+      border-color: #aec3ff;
+      color: var(--primary-strong);
+    }
+
+    .sidebar-foot {
+      margin-top: 1.4rem;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.8rem;
+    }
+
+    .sidebar-foot p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.87rem;
+      line-height: 1.45;
+    }
+
+    .main {
+      padding: 1.5rem;
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      animation: rise 500ms ease;
+    }
+
+    .crumb {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .title {
+      margin: 0.35rem 0 0;
+      font-size: 1.7rem;
+      letter-spacing: 0.2px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.55rem 0.85rem;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-danger {
+      border-color: #e7b8c2;
+      color: var(--danger);
+      background: #fff7f9;
+    }
+
+    .edit-banner {
+      padding: 0.55rem 0.8rem;
+      background: #fff4dc;
+      border: 1px solid #f1d79e;
+      color: #6f4f0d;
+      border-radius: 10px;
+      font-size: 0.86rem;
+    }
+
+    .editable {
+      border-radius: 6px;
+      transition: background-color 0.2s ease, outline-color 0.2s ease;
+      outline: 1px dashed transparent;
+      padding: 0.1rem 0.2rem;
+    }
+
+    .editable:hover {
+      background: #f4f8ff;
+      outline-color: #bfd2ff;
+    }
+
+    .editable:focus {
+      background: #edf4ff;
+      outline: 1px solid #8db0ff;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 0.8rem;
+      animation: rise 680ms ease;
+    }
+
+    .metric {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.85rem;
+      box-shadow: var(--shadow);
+    }
+
+    .metric p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 1.45rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
+      animation: rise 860ms ease;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.95rem 1rem;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .card-sub {
+      margin: 0.2rem 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .badge {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid #bad0ff;
+      color: var(--primary-strong);
+      background: #f1f6ff;
+      white-space: nowrap;
+    }
+
+    .body {
+      padding: 1rem;
+    }
+
+    .doc-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(140px, 1fr));
+      gap: 0.7rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .meta-item {
+      padding: 0.65rem;
+      background: var(--surface-soft);
+      border: 1px solid #dbe4ff;
+      border-radius: 10px;
+    }
+
+    .meta-label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .meta-value {
+      margin: 0.2rem 0 0;
+      font-weight: 600;
+    }
+
+    .hint {
+      border: 1px dashed #b8c6e8;
+      border-radius: 10px;
+      padding: 0.75rem;
+      color: var(--muted);
+      background: #fbfcff;
+      margin: 0.6rem 0 0;
+    }
+
+    .list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .list li {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.65rem;
+      background: #ffffff;
+    }
+
+    .list strong {
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 0.8rem;
+    }
+
+    .lane {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f8faff;
+      padding: 0.65rem;
+      min-height: 280px;
+    }
+
+    .lane h4 {
+      margin: 0 0 0.55rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .count {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .ticket {
+      background: #ffffff;
+      border: 1px solid #d7dff2;
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      padding: 0.55rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .ticket p {
+      margin: 0 0 0.35rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .ticket small {
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .ticket.warn {
+      border-left-color: var(--warning);
+    }
+
+    .ticket.success {
+      border-left-color: var(--success);
+    }
+
+    .ticket.danger {
+      border-left-color: var(--danger);
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .summary {
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .main {
+        padding: 1rem;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .doc-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .board {
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <p class="brand-name">Side Project Doc</p>
+          <p class="brand-subtitle">Edit mode</p>
+        </div>
+      </div>
+
+      <ul class="menu">
+        <li><a class="is-active" href="#overview">Overview</a></li>
+        <li><a href="#scope">Scope</a></li>
+        <li><a href="#requirements">Requirements</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#board">Sprint Board</a></li>
+      </ul>
+
+      <div class="sidebar-foot">
+        <p>You are in edit mode. Changes are saved in your browser on this device.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <p class="edit-banner">Edit Mode is active. Click any highlighted text to update content.</p>
+      <section class="topbar" id="overview">
+        <div>
+          <p class="crumb">Projects / [Project Name] / Documentation</p>
+          <h1 class="title">[Project Name] Side Project Doc</h1>
+        </div>
+        <div class="actions">
+          <button id="save-draft" class="btn btn-primary" type="button">Save Draft</button>
+          <button id="clear-draft" class="btn btn-danger" type="button">Clear Draft</button>
+          <a class="btn" href="side-project-doc.html">Exit Edit Mode</a>
+        </div>
+      </section>
+
+      <section class="summary">
+        <article class="metric">
+          <p>Progress</p>
+          <strong>[35%]</strong>
+        </article>
+        <article class="metric">
+          <p>Owner</p>
+          <strong>[Your Name]</strong>
+        </article>
+        <article class="metric">
+          <p>Target Release</p>
+          <strong>[YYYY-MM-DD]</strong>
+        </article>
+        <article class="metric">
+          <p>Priority</p>
+          <strong>[Medium]</strong>
+        </article>
+      </section>
+
+      <section class="grid" id="scope">
+        <article class="card">
+          <header class="card-head">
+            <div>
+              <h2 class="card-title">Project Brief</h2>
+              <p class="card-sub">One-page definition and success criteria</p>
+            </div>
+            <span class="badge">DOC-01</span>
+          </header>
+          <div class="body">
+            <div class="doc-meta">
+              <div class="meta-item">
+                <p class="meta-label">Problem Statement</p>
+                <p class="meta-value">[Describe the core user/business pain]</p>
+              </div>
+              <div class="meta-item">
+                <p class="meta-label">Target Users</p>
+                <p class="meta-value">[Audience segment]</p>
+              </div>
+              <div class="meta-item">
+                <p class="meta-label">Frontend</p>
+                <p class="meta-value">[Enter frontend architecture and key modules]</p>
+              </div>
+              <div class="meta-item">
+                <p class="meta-label">Backend</p>
+                <p class="meta-value">[Enter backend services, APIs, and data flow]</p>
+              </div>
+              <div class="meta-item">
+                <p class="meta-label">AI Planner</p>
+                <p class="meta-value">[Enter planning/orchestration logic]</p>
+              </div>
+              <div class="meta-item">
+                <p class="meta-label">AI Model</p>
+                <p class="meta-value">[Enter model provider, prompt strategy, and outputs]</p>
+              </div>
+            </div>
+            <p class="hint">Template starter: include objective, current baseline, and how success will be measured in two to three lines.</p>
+          </div>
+        </article>
+
+      </section>
+
+      <section class="grid" id="requirements">
+        <article class="card">
+          <header class="card-head">
+            <div>
+              <h2 class="card-title">Requirements Backlog</h2>
+              <p class="card-sub">Prioritized work items</p>
+            </div>
+            <span class="badge">DOC-03</span>
+          </header>
+          <div class="body">
+            <ul class="list">
+              <li><strong>[SP-101] [Requirement title]</strong>Type: [Story/Bug/Task] | Owner: [Name] | Est: [3 pts]</li>
+              <li><strong>[SP-102] [Requirement title]</strong>Type: [Story/Bug/Task] | Owner: [Name] | Est: [5 pts]</li>
+              <li><strong>[SP-103] [Requirement title]</strong>Type: [Story/Bug/Task] | Owner: [Name] | Est: [2 pts]</li>
+              <li><strong>[SP-104] [Requirement title]</strong>Type: [Story/Bug/Task] | Owner: [Name] | Est: [8 pts]</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card" id="timeline">
+          <header class="card-head">
+            <div>
+              <h2 class="card-title">Milestone Timeline</h2>
+              <p class="card-sub">Keep dates realistic and review weekly</p>
+            </div>
+            <span class="badge">DOC-04</span>
+          </header>
+          <div class="body">
+            <ul class="list">
+              <li><strong>[M1] Discovery Complete</strong>Date: [YYYY-MM-DD] | Output: [Research summary]</li>
+              <li><strong>[M2] Prototype Ready</strong>Date: [YYYY-MM-DD] | Output: [Demo + feedback notes]</li>
+              <li><strong>[M3] Beta Launch</strong>Date: [YYYY-MM-DD] | Output: [UAT + bug log]</li>
+              <li><strong>[M4] Public Release</strong>Date: [YYYY-MM-DD] | Output: [Release notes]</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section class="card" id="board">
+        <header class="card-head">
+          <div>
+            <h2 class="card-title">Sprint Board Snapshot</h2>
+            <p class="card-sub">Use this area like a Jira board preview</p>
+          </div>
+          <span class="badge">DOC-05</span>
+        </header>
+        <div class="body">
+          <div class="board">
+            <div class="lane">
+              <h4>To Do <span class="count">(3)</span></h4>
+              <div class="ticket">
+                <p>[SP-201] Define acceptance criteria</p>
+                <small>Owner: [Name] | Priority: Medium</small>
+              </div>
+              <div class="ticket warn">
+                <p>[SP-202] Confirm API contract</p>
+                <small>Owner: [Name] | Priority: High</small>
+              </div>
+              <div class="ticket">
+                <p>[SP-203] Draft onboarding flow</p>
+                <small>Owner: [Name] | Priority: Medium</small>
+              </div>
+            </div>
+
+            <div class="lane">
+              <h4>In Progress <span class="count">(2)</span></h4>
+              <div class="ticket success">
+                <p>[SP-204] Build feature toggle</p>
+                <small>Owner: [Name] | ETA: [2 days]</small>
+              </div>
+              <div class="ticket warn">
+                <p>[SP-205] QA smoke suite</p>
+                <small>Owner: [Name] | ETA: [1 day]</small>
+              </div>
+            </div>
+
+            <div class="lane">
+              <h4>Done <span class="count">(2)</span></h4>
+              <div class="ticket success">
+                <p>[SP-206] Draft project charter</p>
+                <small>Done by: [Name] | Date: [YYYY-MM-DD]</small>
+              </div>
+              <div class="ticket danger">
+                <p>[SP-207] Resolve blocker in auth flow</p>
+                <small>Done by: [Name] | Date: [YYYY-MM-DD]</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script>
+    (function () {
+      var EDIT_PASSWORD = "change";
+      var EDIT_ACCESS_KEY = "sideProjectDocEditAccess";
+      var DRAFT_KEY = "sideProjectDocDraft";
+      var FALLBACK_DRAFT_KEY = "sideProjectDocDraftFallback";
+
+      var editableSelector = [
+        ".crumb",
+        ".title",
+        ".metric strong",
+        ".card-title",
+        ".card-sub",
+        ".badge",
+        ".meta-value",
+        ".hint",
+        ".list li",
+        ".lane h4",
+        ".ticket p",
+        ".ticket small"
+      ].join(",");
+
+      function getStorageBackend() {
+        try {
+          var probeKey = "__doc_storage_probe__";
+          localStorage.setItem(probeKey, "ok");
+          localStorage.removeItem(probeKey);
+          return localStorage;
+        } catch (error) {
+          return sessionStorage;
+        }
+      }
+
+      var storage = getStorageBackend();
+
+      function guardEditPage() {
+        if (sessionStorage.getItem(EDIT_ACCESS_KEY) === "granted") {
+          return true;
+        }
+
+        var enteredPassword = window.prompt("Enter password to access Edit Mode:");
+
+        if (enteredPassword === EDIT_PASSWORD) {
+          sessionStorage.setItem(EDIT_ACCESS_KEY, "granted");
+          return true;
+        }
+
+        window.alert("Access denied.");
+        window.location.href = "side-project-doc.html";
+        return false;
+      }
+
+      function markEditableFields() {
+        var nodes = document.querySelectorAll(editableSelector);
+
+        nodes.forEach(function (node, index) {
+          node.contentEditable = "true";
+          node.classList.add("editable");
+          node.setAttribute("spellcheck", "false");
+          node.dataset.editId = "field-" + index;
+        });
+      }
+
+      function restoreDraft() {
+        var rawDraft = storage.getItem(DRAFT_KEY) || storage.getItem(FALLBACK_DRAFT_KEY);
+
+        if (!rawDraft) {
+          return;
+        }
+
+        try {
+          var draft = JSON.parse(rawDraft);
+
+          Object.keys(draft).forEach(function (id) {
+            var node = document.querySelector('[data-edit-id="' + id + '"]');
+            if (node) {
+              node.innerHTML = draft[id];
+            }
+          });
+        } catch (error) {
+          console.error("Draft restore failed", error);
+        }
+      }
+
+      function saveDraft() {
+        var draft = {};
+        var nodes = document.querySelectorAll("[data-edit-id]");
+
+        nodes.forEach(function (node) {
+          draft[node.dataset.editId] = node.innerHTML;
+        });
+
+        var serializedDraft = JSON.stringify(draft);
+        storage.setItem(DRAFT_KEY, serializedDraft);
+        storage.setItem(FALLBACK_DRAFT_KEY, serializedDraft);
+        window.alert("Draft saved.");
+      }
+
+      function clearDraft() {
+        storage.removeItem(DRAFT_KEY);
+        storage.removeItem(FALLBACK_DRAFT_KEY);
+        window.alert("Draft cleared. Reload to reset the template view.");
+      }
+
+      if (!guardEditPage()) {
+        return;
+      }
+
+      markEditableFields();
+      restoreDraft();
+
+      document.getElementById("save-draft").addEventListener("click", saveDraft);
+      document.getElementById("clear-draft").addEventListener("click", clearDraft);
+    })();
+  </script>
+</body>
+</html>
