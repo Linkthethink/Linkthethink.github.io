@@ -4,7 +4,7 @@
 <head>
   <title>devfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="src/dist/img/linkedin-profile-pic-cropped.png" type="image/x-icon">
+  <link rel="icon" href="src/dist/img/linkedin-profile-pic-cropped2.png" type="image/x-icon">
   <link rel="stylesheet" href="src/dist/css/main.bundle.css">
   <script src="https://kit.fontawesome.com/4e5a72c756.js"></script>
   <style>
@@ -33,6 +33,58 @@
 
     .portfolio-image {
       margin-top: auto;
+    }
+
+    .js-modal-trigger {
+      cursor: pointer;
+    }
+
+    .project-carousel {
+      position: relative;
+    }
+
+    .project-carousel-slides {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.5rem;
+    }
+
+    .project-carousel-slide {
+      display: none;
+      margin: 0;
+    }
+
+    .project-carousel-slide.is-active {
+      display: block;
+    }
+
+    .project-carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .project-carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .project-carousel-indicator {
+      width: 0.75rem;
+      height: 0.75rem;
+      border: 0;
+      border-radius: 999px;
+      background: #dbdbdb;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .project-carousel-indicator.is-active {
+      background: #3273dc;
     }
   </style>
 </head>
@@ -220,38 +272,61 @@ I am now looking to join a well-structured team where I can continue to grow as 
         <div class="tile is-vertical is-12">
           <div class="tile">
             <div class="tile is-parent portfolio-parent">
-              <article class="tile is-child notification portfolio-card">
-                <p class="title">WebXR Now</p>
-                <p class="portfolio-description">Created an AI-enpowered WebXR scene builder that helps users generate immersive virtual environments quickly for demos and interactive concept validation. Built on a scalable architecture powered by Cloudflare and Google Firebase.</p>
-                 <!--<a href="">Side Project Doc</a>-->
-                <a href="https://www.webxrnow.com">
-                  <figure class="image is-3by2 portfolio-image">
-                    <img src="src/dist/img/project-2-cover(2026).png" alt="WebXR Now project preview">
-                  </figure>
-                </a>
-               
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open National Games for Persons with Disabilities and Special Olympic Games project details" data-modal-title="National Games for Persons with Disabilities and Special Olympic Games" data-modal-description="Supported the development of event and campaign materials for the National Games for Persons with Disabilities and Special Olympic Games, emphasizing accessibility, public engagement, and culturally relevant visual communication. The work focused on delivering campaign imagery that helps communicate inclusion, participation, and support for athletes and communities." data-modal-tags="Accessibility,Event Campaign,Inclusive Design,Community Engagement" data-carousel-slide-1="src/dist/img/1/hkva-1.jpg" data-carousel-slide-2="src/dist/img/1/hkva-2.jpg" data-carousel-slide-3="src/dist/img/1/hkva-3.jpg">
+                <p class="title">National Games for Persons with Disabilities and Special Olympic Games</p>
+                <p class="portfolio-description">Supported event and community campaign materials for the National Games for Persons with Disabilities and Special Olympic Games, with a focus on inclusivity and public engagement.</p>
+                <figure class="image is-3by2 portfolio-image">
+                  <img src="src/dist/img/1/hkva-1.jpg" alt="National Games for Persons with Disabilities and Special Olympic Games preview">
+                </figure>
               </article>
             </div>
             <div class="tile is-parent portfolio-parent">
-              <article class="tile is-child notification portfolio-card">
-                <p class="title">Telegram Bot with API</p>
-                <p class="portfolio-description">Developed a Telegram bot integrated with REST APIs to automate customer service responses and streamline communication processes.</p>
-                <a href="">
-                  <figure class="image is-3by2 portfolio-image">
-                    <img src="https://linkthethink.github.io/src/dist/img/project1-cover.jpg" alt="AI-driven YAML test automation platform">
-                  </figure>
-                </a>
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open World Vision Hong Kong Donation Payment Enhancement project details" data-modal-title="World Vision Hong Kong Donation Payment Enhancement" data-modal-description="Optimized the donation payment flow for World Vision Hong Kong by introducing an Alipay-compatible experience, improving QR-based donation checkout, and strengthening the transaction confirmation and receipt workflow. The mechanism combines donation form capture, payment initialization, callback verification, and post-payment receipt generation to ensure a smoother and more trustworthy giving experience." data-modal-tags="Alipay,Donation Flow,Payment Security,Receipt Logic" data-carousel-slide-1="src/dist/img/2/wvhk-1.jpg" data-carousel-slide-2="src/dist/img/2/wvhk-2.jpg" data-carousel-slide-3="src/dist/img/2/wvhk-3.jpg">
+                <p class="title">World Vision Hong Kong Donation Payment Enhancement</p>
+                <p class="portfolio-description">Optimized the donation payment flow for World Vision Hong Kong by introducing an Alipay-compatible experience, improving QR-based donation checkout, and strengthening the transaction confirmation and receipt workflow.</p>
+                <figure class="image is-3by2 portfolio-image">
+                  <img src="src/dist/img/2/wvhk-1.jpg" alt="World Vision Hong Kong Donation Payment Enhancement preview">
+                </figure>
               </article>
             </div>
             <div class="tile is-parent portfolio-parent">
-              <article class="tile is-child notification portfolio-card">
-                <p class="title">Design Work Portfolio</p>
-                <p class="portfolio-description">Curated cross-channel design work including marketing visuals, social assets, and presentation layouts that support product communication and brand consistency.</p>
-                <a href="https://www.canva.com/design/DAGf7oCD7bk/BGcGbsQQU1oNr8TANFjkwQ/edit?utm_content=DAGf7oCD7bk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
+              <a href="https://www.canva.com/design/DAGf7oCD7bk/BGcGbsQQU1oNr8TANFjkwQ/edit" target="_blank" rel="noopener noreferrer" aria-label="Open Design Work Portfolio in Canva" style="display: block; height: 100%;">
+                <article class="tile is-child notification portfolio-card" role="button" tabindex="0" style="height: 100%;">
+                  <p class="title">Design Work Portfolio</p>
+                  <p class="portfolio-description">Curated cross-channel design work including marketing visuals, social assets, and presentation layouts that support product communication and brand consistency.</p>
                   <figure class="image is-3by2 portfolio-image">
                     <img src="src/dist/img/project-3-cover.jpg" alt="Design work portfolio preview">
                   </figure>
-                </a>
+                </article>
+              </a>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="tile is-parent portfolio-parent" style="display: none;">
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open Project 4 details" data-modal-title="Project 4" data-modal-description="Add your project summary here." data-modal-tags="Project,Case Study,Prototype,Delivery" data-carousel-slide-1="src/dist/img/project-3-cover.jpg" data-carousel-slide-2="src/dist/img/project-3-cover.jpg" data-carousel-slide-3="src/dist/img/project-3-cover.jpg">
+                <p class="title">Project 4</p>
+                <p class="portfolio-description">Add your project summary here.</p>
+                <figure class="image is-3by2 portfolio-image">
+                  <img src="src/dist/img/project-3-cover.jpg" alt="Project 4 preview">
+                </figure>
+              </article>
+            </div>
+            <div class="tile is-parent portfolio-parent" style="display: none;">
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open Project 5 details" data-modal-title="Project 5" data-modal-description="Add your project summary here." data-modal-tags="Project,Case Study,Prototype,Delivery" data-carousel-slide-1="src/dist/img/project-2-cover(2026).png" data-carousel-slide-2="src/dist/img/project-2-cover(2026).png" data-carousel-slide-3="src/dist/img/project-2-cover(2026).png">
+                <p class="title">Project 5</p>
+                <p class="portfolio-description">Add your project summary here.</p>
+                <figure class="image is-3by2 portfolio-image">
+                  <img src="src/dist/img/project-2-cover(2026).png" alt="Project 5 preview">
+                </figure>
+              </article>
+            </div>
+            <div class="tile is-parent portfolio-parent" style="display: none;">
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open Project 6 details" data-modal-title="Project 6" data-modal-description="Add your project summary here." data-modal-tags="Project,Case Study,Prototype,Delivery" data-carousel-slide-1="src/dist/img/project-3-cover.jpg" data-carousel-slide-2="src/dist/img/project-3-cover.jpg" data-carousel-slide-3="src/dist/img/project-3-cover.jpg">
+                <p class="title">Project 6</p>
+                <p class="portfolio-description">Add your project summary here.</p>
+                <figure class="image is-3by2 portfolio-image">
+                  <img src="src/dist/img/project-3-cover.jpg" alt="Project 6 preview">
+                </figure>
               </article>
             </div>
           </div>
@@ -259,6 +334,55 @@ I am now looking to join a well-structured team where I can continue to grow as 
       </div>
     </div>
   </section>
+
+  <div id="project-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title" data-modal-title>World Vision Hong Kong Donation Payment Enhancement</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="project-carousel" data-carousel>
+          <div class="project-carousel-slides">
+            <figure class="image is-4by3 project-carousel-slide is-active" data-carousel-slide>
+              <img src="src/dist/img/2/wvhk-1.jpg" alt="World Vision Hong Kong donation homepage preview">
+            </figure>
+            <figure class="image is-4by3 project-carousel-slide" data-carousel-slide>
+              <img src="src/dist/img/2/wvhk-2.jpg" alt="Alipay donation payment enhancement UAT preview">
+            </figure>
+            <figure class="image is-4by3 project-carousel-slide" data-carousel-slide>
+              <img src="src/dist/img/2/wvhk-3.jpg" alt="Donation receipt confirmation preview">
+            </figure>
+          </div>
+
+          <div class="project-carousel-controls">
+            <button class="button is-small" type="button" data-carousel-prev aria-label="Previous slide">Prev</button>
+            <div class="project-carousel-indicators" aria-label="Carousel slide indicators">
+              <button class="project-carousel-indicator is-active" type="button" data-carousel-indicator aria-label="Go to slide 1"></button>
+              <button class="project-carousel-indicator" type="button" data-carousel-indicator aria-label="Go to slide 2"></button>
+              <button class="project-carousel-indicator" type="button" data-carousel-indicator aria-label="Go to slide 3"></button>
+            </div>
+            <button class="button is-small" type="button" data-carousel-next aria-label="Next slide">Next</button>
+          </div>
+        </div>
+
+        <div class="content">
+          <p data-modal-description>Enhanced the donation journey for World Vision Hong Kong by introducing a more streamlined Alipay payment flow and a clearer confirmation process. The improvement focused on reducing friction during donation submission, supporting secure QR-based payment, and aligning the payment callback, receipt generation, and donor confirmation logic into a consistent end-to-end mechanism. The solution helps donors complete a contribution confidently while giving the organization better visibility into transaction status, donor details, and post-payment follow-up.</p>
+
+          <div class="tags" data-modal-tags>
+            <span class="tag">Alipay</span>
+            <span class="tag">Donation Flow</span>
+            <span class="tag">Payment Logic</span>
+            <span class="tag">Receipt</span>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success js-modal-close">Close</button>
+      </footer>
+    </div>
+  </div>
 
   <section class="section">
     <div class="container">
@@ -361,6 +485,146 @@ I am now looking to join a well-structured team where I can continue to grow as 
   </footer>
 
   <script src="js/bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const setCarouselSlide = function (carousel, index) {
+        const slides = carousel.querySelectorAll('[data-carousel-slide]');
+        const indicators = carousel.querySelectorAll('[data-carousel-indicator]');
+        const totalSlides = slides.length;
+        const activeIndex = ((index % totalSlides) + totalSlides) % totalSlides;
+
+        slides.forEach(function (slide, slideIndex) {
+          slide.classList.toggle('is-active', slideIndex === activeIndex);
+        });
+
+        indicators.forEach(function (indicator, indicatorIndex) {
+          indicator.classList.toggle('is-active', indicatorIndex === activeIndex);
+        });
+
+        carousel.dataset.activeSlide = String(activeIndex);
+      };
+
+      const populateModal = function (modal, trigger) {
+        const title = trigger.getAttribute('data-modal-title') || 'Project';
+        const description = trigger.getAttribute('data-modal-description') || '';
+        const tags = (trigger.getAttribute('data-modal-tags') || '').split(',').map(function (tag) {
+          return tag.trim();
+        }).filter(Boolean);
+        const slides = [
+          trigger.getAttribute('data-carousel-slide-1'),
+          trigger.getAttribute('data-carousel-slide-2'),
+          trigger.getAttribute('data-carousel-slide-3')
+        ].filter(Boolean);
+
+        modal.querySelector('[data-modal-title]').textContent = title;
+        modal.querySelector('[data-modal-description]').textContent = description;
+
+        const tagContainer = modal.querySelector('[data-modal-tags]');
+        tagContainer.innerHTML = '';
+        tags.forEach(function (tag) {
+          const tagElement = document.createElement('span');
+          tagElement.className = 'tag';
+          tagElement.textContent = tag;
+          tagContainer.appendChild(tagElement);
+        });
+
+        const carousel = modal.querySelector('[data-carousel]');
+        const slideElements = carousel.querySelectorAll('[data-carousel-slide]');
+
+        slideElements.forEach(function (slideElement, slideIndex) {
+          const image = slideElement.querySelector('img');
+          const source = slides[slideIndex] || slides[slides.length - 1] || '';
+
+          if (source) {
+            image.src = source;
+          }
+
+          image.alt = title + ' project preview ' + (slideIndex + 1);
+        });
+
+        setCarouselSlide(carousel, 0);
+      };
+
+      const openModal = function (modal, trigger) {
+        if (trigger) {
+          populateModal(modal, trigger);
+        }
+
+        modal.classList.add('is-active');
+      };
+
+      const closeModal = function (modal) {
+        modal.classList.remove('is-active');
+      };
+
+      const modalTriggers = document.querySelectorAll('.js-modal-trigger');
+      const projectModal = document.getElementById('project-modal');
+
+      if (projectModal) {
+        projectModal.querySelector('.modal-background').addEventListener('click', function () {
+          closeModal(projectModal);
+        });
+
+        projectModal.querySelector('.delete').addEventListener('click', function () {
+          closeModal(projectModal);
+        });
+
+        projectModal.querySelector('.js-modal-close').addEventListener('click', function () {
+          closeModal(projectModal);
+        });
+
+        const carousel = projectModal.querySelector('[data-carousel]');
+
+        if (carousel) {
+          const prevButton = carousel.querySelector('[data-carousel-prev]');
+          const nextButton = carousel.querySelector('[data-carousel-next]');
+          const indicators = carousel.querySelectorAll('[data-carousel-indicator]');
+
+          prevButton.addEventListener('click', function () {
+            const currentIndex = parseInt(carousel.dataset.activeSlide || '0', 10);
+            setCarouselSlide(carousel, currentIndex - 1);
+          });
+
+          nextButton.addEventListener('click', function () {
+            const currentIndex = parseInt(carousel.dataset.activeSlide || '0', 10);
+            setCarouselSlide(carousel, currentIndex + 1);
+          });
+
+          indicators.forEach(function (indicator, indicatorIndex) {
+            indicator.addEventListener('click', function () {
+              setCarouselSlide(carousel, indicatorIndex);
+            });
+          });
+        }
+      }
+
+      modalTriggers.forEach(function (trigger) {
+        const modalId = trigger.getAttribute('data-target');
+        const modal = document.getElementById(modalId);
+
+        if (!modal) {
+          return;
+        }
+
+        trigger.addEventListener('click', function () {
+          openModal(modal, trigger);
+        });
+
+        trigger.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openModal(modal, trigger);
+          }
+        });
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && projectModal && projectModal.classList.contains('is-active')) {
+          closeModal(projectModal);
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
