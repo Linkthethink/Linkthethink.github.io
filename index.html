@@ -39,6 +39,23 @@
       cursor: pointer;
     }
 
+    .portfolio-card--no-hover,
+    .portfolio-card--no-hover:hover,
+    .portfolio-card--no-hover:focus,
+    .portfolio-card--no-hover:active,
+    .portfolio-card--no-hover:focus-within,
+    .portfolio-card-link--no-hover,
+    .portfolio-card-link--no-hover:hover,
+    .portfolio-card-link--no-hover:focus,
+    .portfolio-card-link--no-hover:active,
+    .portfolio-card-link--no-hover:visited {
+      transform: none !important;
+      box-shadow: none !important;
+      transition: none !important;
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+
     .project-carousel {
       position: relative;
     }
@@ -290,8 +307,8 @@ I am now looking to join a well-structured team where I can continue to grow as 
               </article>
             </div>
             <div class="tile is-parent portfolio-parent">
-              <a href="https://www.canva.com/design/DAGf7oCD7bk/BGcGbsQQU1oNr8TANFjkwQ/edit" target="_blank" rel="noopener noreferrer" aria-label="Open Design Work Portfolio in Canva" style="display: block; height: 100%;">
-                <article class="tile is-child notification portfolio-card" role="button" tabindex="0" style="height: 100%;">
+              <a class="portfolio-card-link--no-hover" href="https://www.canva.com/design/DAGf7oCD7bk/BGcGbsQQU1oNr8TANFjkwQ/edit" target="_blank" rel="noopener noreferrer" aria-label="Open Design Work Portfolio in Canva" style="display: block; height: 100%;">
+                <article class="tile is-child notification portfolio-card portfolio-card--no-hover" role="button" tabindex="0" style="height: 100%;">
                   <p class="title">Design Work Portfolio</p>
                   <p class="portfolio-description">Curated cross-channel design work including marketing visuals, social assets, and presentation layouts that support product communication and brand consistency.</p>
                   <figure class="image is-3by2 portfolio-image">
