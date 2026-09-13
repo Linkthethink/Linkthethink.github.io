@@ -1,8 +1,7 @@
 # Say Hi👋
 ## About Me
-Hello, my name is Beatrice Li. I have recently embarked on a career change journey from an e-commerce operations role into the field of quality assurance. In my previous position, I managed cosmetics brand site operations in my previous job, which allowed me to develop strong analytical and problem-solving skills.
+Hi, I am Beatrice, a business Analyst with a career transition from e-commerce into system and AI solution development. Experienced in translating business needs into technical solutions, working closely with clients and cross-functional teams across marketing, non-profit, and SMB sectors. I am seeking to grow within a structured team, contributing as a strong bridge between business needs and technical delivery.
 
-With the rapid advancement of AI technologies, I recognize the growing importance of robust system design and quality assurance. This realization has driven my desire to focus on test automation and enhance the quality of software systems. I’m eager to leverage my background in operations and my passion for technology to contribute effectively to your team. Thank you for the opportunity to discuss how I can add value to your organization.
 
 ## Personal Portfolio Site
 https://linkthethink.github.io/
