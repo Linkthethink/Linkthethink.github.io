@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <title>devfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="src/dist/img/linkedin-profile-pic-cropped2.png" type="image/x-icon">
@@ -17,18 +18,36 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 0.75rem;
     }
 
     .portfolio-card .title {
       margin-bottom: 0.25rem;
+      min-height: 4.75rem;
+      display: flex;
+      align-items: flex-start;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: normal;
     }
 
     .portfolio-description {
       min-height: 4.5rem;
       line-height: 1.45;
       margin-bottom: 0.25rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: normal;
+    }
+
+    .modal-card-head .modal-card-title {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: normal;
+      line-height: 1.3;
+      flex: 1 1 auto;
+      margin-right: 1rem;
     }
 
     .portfolio-image {
@@ -37,6 +56,62 @@
 
     .js-modal-trigger {
       cursor: pointer;
+    }
+
+    .modal-card-body {
+      position: relative;
+    }
+
+    .project-scroll-indicator {
+      position: absolute;
+      right: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 999px;
+      background: rgba(10, 10, 10, 0.04);
+      color: rgba(74, 74, 74, 0.65);
+      box-shadow: 0 0 0 1px rgba(74, 74, 74, 0.06);
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    }
+
+    .project-scroll-indicator span {
+      font-size: 1.2rem;
+      line-height: 1;
+      display: block;
+      animation: scroll-bob 1.5s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .project-scroll-indicator.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-50%) scale(0.9);
+    }
+
+    @keyframes scroll-bob {
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translateY(5px);
+        opacity: 1;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .project-scroll-indicator {
+        right: 0.55rem;
+      }
     }
 
     .portfolio-card--no-hover,
@@ -289,18 +364,20 @@ I am now looking to join a well-structured team where I can continue to grow as 
         <div class="tile is-vertical is-12">
           <div class="tile">
             <div class="tile is-parent portfolio-parent">
-              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open National Games for Persons with Disabilities and Special Olympic Games project details" data-modal-title="National Games for Persons with Disabilities and Special Olympic Games" data-modal-description="Supported the development of event and campaign materials for the National Games for Persons with Disabilities and Special Olympic Games, emphasizing accessibility, public engagement, and culturally relevant visual communication. The work focused on delivering campaign imagery that helps communicate inclusion, participation, and support for athletes and communities." data-modal-tags="Accessibility,Event Campaign,Inclusive Design,Community Engagement" data-carousel-slide-1="src/dist/img/1/hkva-1.jpg" data-carousel-slide-2="src/dist/img/1/hkva-2.jpg" data-carousel-slide-3="src/dist/img/1/hkva-3.jpg">
-                <p class="title">National Games for Persons with Disabilities and Special Olympic Games</p>
-                <p class="portfolio-description">Supported event and community campaign materials for the National Games for Persons with Disabilities and Special Olympic Games, with a focus on inclusivity and public engagement.</p>
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open Volunteer Service Platform project details" data-modal-title="Volunteer Service Platform" data-modal-description="Client: Hong Kong Volunteers Association. Role: QA validation for volunteer shift registration, login/logout, leave application, and remuneration workflows using Playwright to surface issues and edge cases." data-modal-tags="QA,Playwright,Volunteer Systems,User Validation" data-carousel-slide-1="src/dist/img/1/hkva-1.jpg" data-carousel-slide-2="src/dist/img/1/hkva-2.jpg" data-carousel-slide-3="src/dist/img/1/hkva-3.jpg">
+                <p class="title">Volunteer Service<br>Platform</p>
+                <p class="portfolio-description"><strong>Client:</strong> Hong Kong Volunteers Association</p>
+                <p class="portfolio-description"><strong>Role:</strong> QA validation for volunteer shift registration, login/logout, leave application, and remuneration workflows using Playwright to surface issues and edge cases.</p>
                 <figure class="image is-3by2 portfolio-image">
-                  <img src="src/dist/img/1/hkva-1.jpg" alt="National Games for Persons with Disabilities and Special Olympic Games preview">
+                  <img src="src/dist/img/1/hkva-1.jpg" alt="Volunteer Service Platform preview">
                 </figure>
               </article>
             </div>
             <div class="tile is-parent portfolio-parent">
-              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open World Vision Hong Kong Donation Payment Enhancement project details" data-modal-title="World Vision Hong Kong Donation Payment Enhancement" data-modal-description="Optimized the donation payment flow for World Vision Hong Kong by introducing an Alipay-compatible experience, improving QR-based donation checkout, and strengthening the transaction confirmation and receipt workflow. The mechanism combines donation form capture, payment initialization, callback verification, and post-payment receipt generation to ensure a smoother and more trustworthy giving experience." data-modal-tags="Alipay,Donation Flow,Payment Security,Receipt Logic" data-carousel-slide-1="src/dist/img/2/wvhk-1.jpg" data-carousel-slide-2="src/dist/img/2/wvhk-2.jpg" data-carousel-slide-3="src/dist/img/2/wvhk-3.jpg">
-                <p class="title">World Vision Hong Kong Donation Payment Enhancement</p>
-                <p class="portfolio-description">Optimized the donation payment flow for World Vision Hong Kong by introducing an Alipay-compatible experience, improving QR-based donation checkout, and strengthening the transaction confirmation and receipt workflow.</p>
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open World Vision Hong Kong Donation Payment Enhancement project details" data-modal-title="World Vision Hong Kong Donation Payment Enhancement" data-modal-description="Client: World Vision Hong Kong. Role: Optimized the donation payment flow with Alipay-compatible checkout, stronger callback verification, and clearer receipt generation." data-modal-tags="Alipay,Donation Flow,Payment Security,Receipt Logic" data-carousel-slide-1="src/dist/img/2/wvhk-1.jpg" data-carousel-slide-2="src/dist/img/2/wvhk-2.jpg" data-carousel-slide-3="src/dist/img/2/wvhk-3.jpg">
+                <p class="title">Donation Payment Enhancement</p>
+                <p class="portfolio-description"><strong>Client:</strong> World Vision Hong Kong</p>
+                <p class="portfolio-description"><strong>Role:</strong> Optimized the donation payment flow with Alipay-compatible checkout, stronger callback verification, and clearer receipt generation.</p>
                 <figure class="image is-3by2 portfolio-image">
                   <img src="src/dist/img/2/wvhk-1.jpg" alt="World Vision Hong Kong Donation Payment Enhancement preview">
                 </figure>
@@ -309,8 +386,9 @@ I am now looking to join a well-structured team where I can continue to grow as 
             <div class="tile is-parent portfolio-parent">
               <a class="portfolio-card-link--no-hover" href="https://www.canva.com/design/DAGf7oCD7bk/BGcGbsQQU1oNr8TANFjkwQ/edit" target="_blank" rel="noopener noreferrer" aria-label="Open Design Work Portfolio in Canva" style="display: block; height: 100%;">
                 <article class="tile is-child notification portfolio-card portfolio-card--no-hover" role="button" tabindex="0" style="height: 100%;">
-                  <p class="title">Design Work Portfolio</p>
-                  <p class="portfolio-description">Curated cross-channel design work including marketing visuals, social assets, and presentation layouts that support product communication and brand consistency.</p>
+                  <p class="title">Digital Marketing<br>Portfolio</p>
+                  <p class="portfolio-description"><strong>Role:</strong> Curated cross-channel design work across marketing visuals, social assets, and presentation layouts.</p>
+                  <p class="portfolio-description"><strong>Description:</strong> Supports product communication and brand consistency through polished, on-brand visual execution.</p>
                   <figure class="image is-3by2 portfolio-image">
                     <img src="src/dist/img/project-3-cover.jpg" alt="Design work portfolio preview">
                   </figure>
@@ -319,30 +397,30 @@ I am now looking to join a well-structured team where I can continue to grow as 
             </div>
           </div>
           <div class="tile">
-            <div class="tile is-parent portfolio-parent" style="display: none;">
-              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open Project 4 details" data-modal-title="Project 4" data-modal-description="Add your project summary here." data-modal-tags="Project,Case Study,Prototype,Delivery" data-carousel-slide-1="src/dist/img/project-3-cover.jpg" data-carousel-slide-2="src/dist/img/project-3-cover.jpg" data-carousel-slide-3="src/dist/img/project-3-cover.jpg">
-                <p class="title">Project 4</p>
-                <p class="portfolio-description">Add your project summary here.</p>
+            <div class="tile is-parent portfolio-parent">
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open Look Studio Dashboard project details" data-modal-title="Look Studio Dashboard" data-modal-description="In-house Look Studio dashboard built with GA4 and Google Search Console to support periodic traffic analysis and SEO review." data-modal-tags="Look Studio,GA4,Google Search Console,SEO" data-carousel-slide-1="src/dist/img/4/1.jpg" data-carousel-slide-2="src/dist/img/4/2.jpg" data-carousel-slide-3="src/dist/img/4/3.jpg">
+                <p class="title">Look Studio Dashboard</p>
+                <p class="portfolio-description">In-house traffic dashboard built with GA4 and Google Search Console for periodic SEO review.</p>
                 <figure class="image is-3by2 portfolio-image">
-                  <img src="src/dist/img/project-3-cover.jpg" alt="Project 4 preview">
+                  <img src="src/dist/img/4/1.jpg" alt="Look Studio Dashboard preview">
                 </figure>
               </article>
             </div>
-            <div class="tile is-parent portfolio-parent" style="display: none;">
-              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open Project 5 details" data-modal-title="Project 5" data-modal-description="Add your project summary here." data-modal-tags="Project,Case Study,Prototype,Delivery" data-carousel-slide-1="src/dist/img/project-2-cover(2026).png" data-carousel-slide-2="src/dist/img/project-2-cover(2026).png" data-carousel-slide-3="src/dist/img/project-2-cover(2026).png">
-                <p class="title">Project 5</p>
-                <p class="portfolio-description">Add your project summary here.</p>
+            <div class="tile is-parent portfolio-parent">
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open MarketHK Messaging Platform project details" data-modal-title="MarketHK Messaging Platform" data-modal-description="In-house messaging platform for MarketHK built with the development team, QA support, social media post creation, and customer enquiry handling." data-modal-tags="MarketHK,Messaging Platform,QA,Social Media" data-carousel-slide-1="src/dist/img/5/1.jpg" data-carousel-slide-2="src/dist/img/5/2.jpg" data-carousel-slide-3="src/dist/img/5/3.jpg" data-carousel-slide-4="src/dist/img/5/4.jpg">
+                <p class="title">MarketHK Messaging Platform</p>
+                <p class="portfolio-description">In-house messaging platform built with the development team, QA support, social content, and customer enquiries.</p>
                 <figure class="image is-3by2 portfolio-image">
-                  <img src="src/dist/img/project-2-cover(2026).png" alt="Project 5 preview">
+                  <img src="src/dist/img/5/1.jpg" alt="MarketHK Messaging Platform preview">
                 </figure>
               </article>
             </div>
-            <div class="tile is-parent portfolio-parent" style="display: none;">
-              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open Project 6 details" data-modal-title="Project 6" data-modal-description="Add your project summary here." data-modal-tags="Project,Case Study,Prototype,Delivery" data-carousel-slide-1="src/dist/img/project-3-cover.jpg" data-carousel-slide-2="src/dist/img/project-3-cover.jpg" data-carousel-slide-3="src/dist/img/project-3-cover.jpg">
-                <p class="title">Project 6</p>
-                <p class="portfolio-description">Add your project summary here.</p>
+            <div class="tile is-parent portfolio-parent">
+              <article class="tile is-child notification portfolio-card js-modal-trigger" data-target="project-modal" role="button" tabindex="0" aria-label="Open Paperless Card project details" data-modal-title="Paperless Card" data-modal-description="Digital business card platform at https://paperless.cards/. Users can track card views, save contacts into folders, replace paper cards, donate to NGOs, and wear endorsement badges. Role: develop functions and quality assurance." data-modal-tags="Digital Business Card,QA,Product Development,Networking" data-carousel-slide-1="src/dist/img/6/1.jpg" data-carousel-slide-2="src/dist/img/6/2.jpg" data-carousel-slide-3="src/dist/img/6/3.jpg" data-carousel-slide-4="src/dist/img/6/4.jpg">
+                <p class="title">Paperless Card</p>
+                <p class="portfolio-description">Digital business card platform with card tracking, contact folders, NGO donation, and endorsement badges.</p>
                 <figure class="image is-3by2 portfolio-image">
-                  <img src="src/dist/img/project-3-cover.jpg" alt="Project 6 preview">
+                  <img src="src/dist/img/6/1.jpg" alt="Paperless Card preview">
                 </figure>
               </article>
             </div>
@@ -356,20 +434,23 @@ I am now looking to join a well-structured team where I can continue to grow as 
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title" data-modal-title>World Vision Hong Kong Donation Payment Enhancement</p>
+        <p class="modal-card-title" data-modal-title>Paperless Card</p>
         <button class="delete" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
         <div class="project-carousel" data-carousel>
           <div class="project-carousel-slides">
             <figure class="image is-4by3 project-carousel-slide is-active" data-carousel-slide>
-              <img src="src/dist/img/2/wvhk-1.jpg" alt="World Vision Hong Kong donation homepage preview">
+              <img src="src/dist/img/6/1.jpg" alt="Paperless Card preview 1">
             </figure>
             <figure class="image is-4by3 project-carousel-slide" data-carousel-slide>
-              <img src="src/dist/img/2/wvhk-2.jpg" alt="Alipay donation payment enhancement UAT preview">
+              <img src="src/dist/img/6/2.jpg" alt="Paperless Card preview 2">
             </figure>
             <figure class="image is-4by3 project-carousel-slide" data-carousel-slide>
-              <img src="src/dist/img/2/wvhk-3.jpg" alt="Donation receipt confirmation preview">
+              <img src="src/dist/img/6/3.jpg" alt="Paperless Card preview 3">
+            </figure>
+            <figure class="image is-4by3 project-carousel-slide" data-carousel-slide>
+              <img src="src/dist/img/6/4.jpg" alt="Paperless Card preview 4">
             </figure>
           </div>
 
@@ -379,9 +460,14 @@ I am now looking to join a well-structured team where I can continue to grow as 
               <button class="project-carousel-indicator is-active" type="button" data-carousel-indicator aria-label="Go to slide 1"></button>
               <button class="project-carousel-indicator" type="button" data-carousel-indicator aria-label="Go to slide 2"></button>
               <button class="project-carousel-indicator" type="button" data-carousel-indicator aria-label="Go to slide 3"></button>
+              <button class="project-carousel-indicator" type="button" data-carousel-indicator aria-label="Go to slide 4"></button>
             </div>
             <button class="button is-small" type="button" data-carousel-next aria-label="Next slide">Next</button>
           </div>
+        </div>
+
+        <div class="project-scroll-indicator" aria-hidden="true">
+          <span>⌄</span>
         </div>
 
         <div class="content">
@@ -395,9 +481,6 @@ I am now looking to join a well-structured team where I can continue to grow as 
           </div>
         </div>
       </section>
-      <footer class="modal-card-foot">
-        <button class="button is-success js-modal-close">Close</button>
-      </footer>
     </div>
   </div>
 
@@ -530,7 +613,8 @@ I am now looking to join a well-structured team where I can continue to grow as 
         const slides = [
           trigger.getAttribute('data-carousel-slide-1'),
           trigger.getAttribute('data-carousel-slide-2'),
-          trigger.getAttribute('data-carousel-slide-3')
+          trigger.getAttribute('data-carousel-slide-3'),
+          trigger.getAttribute('data-carousel-slide-4')
         ].filter(Boolean);
 
         modal.querySelector('[data-modal-title]').textContent = title;
@@ -574,21 +658,44 @@ I am now looking to join a well-structured team where I can continue to grow as 
         modal.classList.remove('is-active');
       };
 
+      const updateProjectScrollIndicator = function () {
+        const modalBody = document.querySelector('#project-modal .modal-card-body');
+        const indicator = document.querySelector('#project-modal .project-scroll-indicator');
+
+        if (!modalBody || !indicator) {
+          return;
+        }
+
+        const hasMoreContent = modalBody.scrollHeight > modalBody.clientHeight + 1;
+        const hasScrolled = modalBody.scrollTop > 0;
+        const isAtBottom = modalBody.scrollHeight - modalBody.scrollTop <= modalBody.clientHeight + 2;
+
+        indicator.classList.toggle('is-hidden', !hasMoreContent || hasScrolled || isAtBottom);
+      };
+
       const modalTriggers = document.querySelectorAll('.js-modal-trigger');
       const projectModal = document.getElementById('project-modal');
 
       if (projectModal) {
+        const modalBody = projectModal.querySelector('.modal-card-body');
+        const indicator = projectModal.querySelector('.project-scroll-indicator');
+
+        if (modalBody && indicator) {
+          updateProjectScrollIndicator();
+          modalBody.addEventListener('scroll', updateProjectScrollIndicator, { passive: true });
+        }
+
         projectModal.querySelector('.modal-background').addEventListener('click', function () {
           closeModal(projectModal);
         });
 
-        projectModal.querySelector('.delete').addEventListener('click', function () {
-          closeModal(projectModal);
-        });
+        const topCloseButton = projectModal.querySelector('.delete');
 
-        projectModal.querySelector('.js-modal-close').addEventListener('click', function () {
-          closeModal(projectModal);
-        });
+        if (topCloseButton) {
+          topCloseButton.addEventListener('click', function () {
+            closeModal(projectModal);
+          });
+        }
 
         const carousel = projectModal.querySelector('[data-carousel]');
 
